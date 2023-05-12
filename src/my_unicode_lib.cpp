@@ -1,99 +1,24 @@
-#include <iostream>
 #include "my_unicode_lib.h"
 
+#include <iostream>
+
+#define U_USING_ICU_NAMESPACE 1
+#include <unicode/coll.h>
+#include <unicode/locid.h>
 
 
-void my_unicode_lib(){
-    
+void my_unicode_lib()
+{
+    std::cout << "start" << std::endl;
 
-    #ifdef NDEBUG
-    std::cout << "my_unicode_lib/0.1: Hello World Release!\n";
-    #else
-    std::cout << "my_unicode_lib/0.1: Hello World Debug!\n";
-    #endif
+    Locale locale = Locale::getUS();
+    UErrorCode status = U_ZERO_ERROR;
+    Collator* collator = Collator::createInstance(locale, status);
+    if (U_SUCCESS(status))
+        std::cout << "Successfully created collator" << std::endl;
+    else
+        std::cerr << "Failed to create collator: " << status << std::endl;
+    delete collator;
 
-    // ARCHITECTURES
-    #ifdef _M_X64
-    std::cout << "  my_unicode_lib/0.1: _M_X64 defined\n";
-    #endif
-
-    #ifdef _M_IX86
-    std::cout << "  my_unicode_lib/0.1: _M_IX86 defined\n";
-    #endif
-
-    #ifdef _M_ARM64
-    std::cout << "  my_unicode_lib/0.1: _M_ARM64 defined\n";
-    #endif
-
-    #if __i386__
-    std::cout << "  my_unicode_lib/0.1: __i386__ defined\n";
-    #endif
-
-    #if __x86_64__
-    std::cout << "  my_unicode_lib/0.1: __x86_64__ defined\n";
-    #endif
-
-    #if __aarch64__
-    std::cout << "  my_unicode_lib/0.1: __aarch64__ defined\n";
-    #endif
-
-    // Libstdc++
-    #if defined _GLIBCXX_USE_CXX11_ABI
-    std::cout << "  my_unicode_lib/0.1: _GLIBCXX_USE_CXX11_ABI "<< _GLIBCXX_USE_CXX11_ABI << "\n";
-    #endif
-
-    // COMPILER VERSIONS
-    #if _MSC_VER
-    std::cout << "  my_unicode_lib/0.1: _MSC_VER" << _MSC_VER<< "\n";
-    #endif
-
-    #if _MSVC_LANG
-    std::cout << "  my_unicode_lib/0.1: _MSVC_LANG" << _MSVC_LANG<< "\n";
-    #endif
-
-    #if __cplusplus
-    std::cout << "  my_unicode_lib/0.1: __cplusplus" << __cplusplus<< "\n";
-    #endif
-
-    #if __INTEL_COMPILER
-    std::cout << "  my_unicode_lib/0.1: __INTEL_COMPILER" << __INTEL_COMPILER<< "\n";
-    #endif
-
-    #if __GNUC__
-    std::cout << "  my_unicode_lib/0.1: __GNUC__" << __GNUC__<< "\n";
-    #endif
-
-    #if __GNUC_MINOR__
-    std::cout << "  my_unicode_lib/0.1: __GNUC_MINOR__" << __GNUC_MINOR__<< "\n";
-    #endif
-
-    #if __clang_major__
-    std::cout << "  my_unicode_lib/0.1: __clang_major__" << __clang_major__<< "\n";
-    #endif
-
-    #if __clang_minor__
-    std::cout << "  my_unicode_lib/0.1: __clang_minor__" << __clang_minor__<< "\n";
-    #endif
-
-    #if __apple_build_version__
-    std::cout << "  my_unicode_lib/0.1: __apple_build_version__" << __apple_build_version__<< "\n";
-    #endif
-
-    // SUBSYSTEMS
-
-    #if __MSYS__
-    std::cout << "  my_unicode_lib/0.1: __MSYS__" << __MSYS__<< "\n";
-    #endif
-
-    #if __MINGW32__
-    std::cout << "  my_unicode_lib/0.1: __MINGW32__" << __MINGW32__<< "\n";
-    #endif
-
-    #if __MINGW64__
-    std::cout << "  my_unicode_lib/0.1: __MINGW64__" << __MINGW64__<< "\n";
-    #endif
-
-    #if __CYGWIN__
-    std::cout << "  my_unicode_lib/0.1: __CYGWIN__" << __CYGWIN__<< "\n";
-    #endif
+    std::cout << "end" << std::endl;
 }

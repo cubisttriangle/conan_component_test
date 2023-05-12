@@ -21,6 +21,12 @@ class my_unicode_libRecipe(ConanFile):
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
 
+    def requirements(self):
+        if self.settings.os == "Linux":
+            self.requires("icu/73.1")
+        else:
+            raise Exception("Only Linux supported")
+
     def config_options(self):
         if self.settings.os == "Windows":
             self.options.rm_safe("fPIC")
