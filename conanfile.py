@@ -54,9 +54,9 @@ class my_unicode_libRecipe(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["my_unicode_lib"]
+        self.cpp_info.set_property("cmake_file_name", "my_unicode_lib")
+        self.cpp_info.set_property("pkg_config_name", "my_unicode_lib")
 
-    
-
-    
-
+        self.cpp_info.components["uni"].set_property("cmake_target_name", "my_unicode_lib::uni")
+        self.cpp_info.components["uni"].set_property("pkg_config_name", "my_unicode_lib_uni")
+        self.cpp_info.components["uni"].libs = ["uni"]
