@@ -60,3 +60,4 @@ class my_unicode_libRecipe(ConanFile):
         self.cpp_info.components["uni"].set_property("cmake_target_name", "my_unicode_lib::uni")
         self.cpp_info.components["uni"].set_property("pkg_config_name", "my_unicode_lib_uni")
         self.cpp_info.components["uni"].libs = ["uni"]
+        self.cpp_info.components["uni"].requires = ["icu::icu-i18n"]
